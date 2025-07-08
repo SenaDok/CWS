@@ -16,8 +16,7 @@ Coded by www.creative-tim.com
 import { useEffect } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -45,20 +44,19 @@ export default function App() {
       }
 
       if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
+        return <Route exact path={route.route} component={route.component} key={route.key} />;
       }
-
       return null;
     });
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Routes>
+      <Switch>
         {getRoutes(routes)}
-        <Route path="/presentation" element={<Presentation />} />
-        <Route path="*" element={<Navigate to="/presentation" />} />
-      </Routes>
+        <Route exact path="/presentation" component={Presentation} />
+        <Redirect to="/" />
+      </Switch>
     </ThemeProvider>
   );
 }
