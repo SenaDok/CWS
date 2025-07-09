@@ -2,6 +2,10 @@
 import React from "react";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
+// Material Kit 2 components
+import MKBox from "components/MKBox";
+import MKInput from "components/MKInput";
+import MKButton from "components/MKButton";
 
 export default function AboutPage() {
   return (
@@ -19,7 +23,7 @@ export default function AboutPage() {
 
         {/* Coworking Space Image */}
         <img
-          src="/Coffee-Cup.jpg"
+          src="/CWS-image.jpg"
           alt="Coworking Space"
           style={{
             width: "100%",
@@ -32,23 +36,33 @@ export default function AboutPage() {
 
         {/* Contact Form */}
         <h2>Contact Us</h2>
-        <form style={{ maxWidth: "600px" }}>
-          <div style={{ marginBottom: "1rem" }}>
-            <label>Name</label>
-            <input type="text" placeholder="Your Name" className="form-control" />
-          </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <label>Email</label>
-            <input type="email" placeholder="Your Email" className="form-control" />
-          </div>
-          <div style={{ marginBottom: "1rem" }}>
-            <label>Message</label>
-            <textarea placeholder="Your Message" className="form-control" rows="5" />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Send
-          </button>
-        </form>
+        <div style={{ display: "flex", alignItems: "flex-start", marginBottom: "2rem" }}>
+          <img
+            src="/Coffee-Cup.jpg"
+            alt="Contact"
+            style={{
+              width: "200px",
+              height: "200px",
+              objectFit: "cover",
+              borderRadius: "8px",
+              marginRight: "1rem",
+            }}
+          />
+          <MKBox component="form" sx={{ maxWidth: "600px" }}>
+            <MKBox mb={2}>
+              <MKInput label="Name" variant="standard" fullWidth />
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput type="email" label="Email" variant="standard" fullWidth />
+            </MKBox>
+            <MKBox mb={2}>
+              <MKInput label="Message" variant="standard" multiline rows={5} fullWidth />
+            </MKBox>
+            <MKButton type="submit" variant="gradient" color="info">
+              Send
+            </MKButton>
+          </MKBox>
+        </div>
 
         {/* Google Maps */}
         <h2 style={{ marginTop: "3rem" }}>Our Location</h2>

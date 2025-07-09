@@ -41,7 +41,7 @@ export default function BookPage() {
 
   return (
     <>
-      <DefaultNavbar routes={routes} />
+      <DefaultNavbar routes={routes} center />
       <MKBox className={classes.container}>
         <MKTypography variant="h2" mb={2}>
           Book a Seat
