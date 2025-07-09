@@ -1,25 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
 import routes from "routes";
-import footerRoutes from "footer.routes";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  container: {
+    padding: "100px 20px",
+    textAlign: "center",
+  },
+}));
 
 export default function HomePage() {
+  const classes = useStyles();
+
   return (
     <>
-      <DefaultNavbar routes={routes} />
-      <div>
-        <h1>Welcome to the CWS App</h1>
-        <nav>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-          <Link to="/book">Book a Seat</Link>
-          <Link to="/terms">Terms</Link>
-          <Link to="/about">About</Link>
-        </nav>
+      <DefaultNavbar routes={routes} center />
+      <div className={classes.container}>
+        <h1>Welcome to the Co-Working Space!</h1>
       </div>
-      <DefaultFooter content={footerRoutes} />
     </>
   );
 }

@@ -6,9 +6,7 @@ import Icon from "@material-ui/core/Icon";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button"; // ✅ Material UI button
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
 import routes from "routes";
-import footerRoutes from "footer.routes";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -25,7 +23,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <DefaultNavbar routes={routes} />
+      <DefaultNavbar routes={routes} center />
       <div className={classes.container}>
         <h2>Login</h2>
         <TextField
@@ -59,7 +57,6 @@ export default function LoginPage() {
           Log In
         </Button>
       </div>
-      <DefaultFooter content={footerRoutes} />
     </>
   );
 }

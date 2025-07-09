@@ -1,14 +1,20 @@
+// src/pages/AboutPage.js
 import React from "react";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
 import routes from "routes";
-import footerRoutes from "footer.routes";
 
 export default function AboutPage() {
   return (
     <>
-      <DefaultNavbar routes={routes} />
-      <div style={{ padding: "2rem" }}>
+      <DefaultNavbar routes={routes} center />
+      <div
+        style={{
+          paddingTop: "100px",
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
+          paddingBottom: "2rem",
+        }}
+      >
         <h1>About Our Coworking Space</h1>
 
         {/* Coworking Space Image */}
@@ -57,7 +63,6 @@ export default function AboutPage() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-      <DefaultFooter content={footerRoutes} />
     </>
   );
 }

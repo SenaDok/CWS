@@ -38,7 +38,6 @@ Coded by www.creative-tim.com
 
 import React from "react";
 import Icon from "@mui/material/Icon";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import LoginPage from "pages/LoginPage.js";
 import RegisterPage from "./pages/RegisterPage";
 import BookPage from "./pages/BookPage";
@@ -47,6 +46,12 @@ import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 
 const routes = [
+  {
+    name: "Home",
+    icon: <Icon>home</Icon>,
+    route: "/",
+    component: HomePage,
+  },
   {
     name: "Login",
     icon: <Icon>login</Icon>,
@@ -76,17 +81,6 @@ const routes = [
     icon: <Icon>info</Icon>,
     route: "/about",
     component: AboutPage,
-  },
-  {
-    name: "Home",
-    icon: <Icon>home</Icon>,
-    route: "/",
-    component: HomePage,
-  },
-  {
-    name: "GitHub",
-    icon: <GitHubIcon />,
-    href: "https://www.github.com/creativetimofficial/material-kit-react",
   },
 ];
 

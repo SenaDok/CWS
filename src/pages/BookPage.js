@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
 import routes from "routes";
-import footerRoutes from "footer.routes";
+import { makeStyles } from "@material-ui/core/styles";
 
 // Material Kit 2 components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKProgress from "components/MKProgress";
 
+const useStyles = makeStyles(() => ({
+  container: {
+    padding: "100px 20px",
+    textAlign: "center",
+  },
+  input: {
+    marginBottom: "20px",
+  },
+}));
+
 export default function BookPage() {
+  const classes = useStyles();
   const [capacity, setCapacity] = useState(0);
   const [occupancy, setOccupancy] = useState(0);
 
@@ -32,7 +42,7 @@ export default function BookPage() {
   return (
     <>
       <DefaultNavbar routes={routes} />
-      <MKBox p={4}>
+      <MKBox className={classes.container}>
         <MKTypography variant="h2" mb={2}>
           Book a Seat
         </MKTypography>
@@ -44,7 +54,6 @@ export default function BookPage() {
         </MKTypography>
         <MKProgress color="info" value={usage} label />
       </MKBox>
-      <DefaultFooter content={footerRoutes} />
     </>
   );
 }

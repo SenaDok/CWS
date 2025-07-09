@@ -5,6 +5,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 import EmailIcon from "@material-ui/icons/Email";
 import Button from "@material-ui/core/Button";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import routes from "routes";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -41,68 +43,71 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className={classes.container}>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} noValidate>
-        <TextField
-          label="Name"
-          name="name"
-          variant="outlined"
-          fullWidth
-          value={formValues.name}
-          onChange={handleChange}
-          className={classes.input}
-          error={Boolean(errors.name)}
-          helperText={errors.name || " "}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Icon>person</Icon>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <TextField
-          label="Email"
-          name="email"
-          variant="outlined"
-          fullWidth
-          value={formValues.email}
-          onChange={handleChange}
-          className={classes.input}
-          error={Boolean(errors.email)}
-          helperText={errors.email || " "}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <EmailIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-        <TextField
-          label="Password"
-          name="password"
-          type="password"
-          variant="outlined"
-          fullWidth
-          value={formValues.password}
-          onChange={handleChange}
-          className={classes.input}
-          error={Boolean(errors.password)}
-          helperText={errors.password || " "}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Icon>lock_outline</Icon>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <Button variant="contained" color="primary" type="submit">
-          Register
-        </Button>
-      </form>
-    </div>
+    <>
+      <DefaultNavbar routes={routes} center />
+      <div className={classes.container}>
+        <h2>Register</h2>
+        <form onSubmit={handleSubmit} noValidate>
+          <TextField
+            label="Name"
+            name="name"
+            variant="outlined"
+            fullWidth
+            value={formValues.name}
+            onChange={handleChange}
+            className={classes.input}
+            error={Boolean(errors.name)}
+            helperText={errors.name || " "}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Icon>person</Icon>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            label="Email"
+            name="email"
+            variant="outlined"
+            fullWidth
+            value={formValues.email}
+            onChange={handleChange}
+            className={classes.input}
+            error={Boolean(errors.email)}
+            helperText={errors.email || " "}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <EmailIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            label="Password"
+            name="password"
+            type="password"
+            variant="outlined"
+            fullWidth
+            value={formValues.password}
+            onChange={handleChange}
+            className={classes.input}
+            error={Boolean(errors.password)}
+            helperText={errors.password || " "}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Icon>lock_outline</Icon>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <Button variant="contained" color="primary" type="submit">
+            Register
+          </Button>
+        </form>
+      </div>
+    </>
   );
 }
