@@ -23,7 +23,7 @@ export default function AboutPage() {
 
         {/* Coworking Space Image */}
         <img
-          src="/CWS-image.jpg"
+          src="CWS-image.jpg"
           alt="Coworking Space"
           style={{
             width: "100%",
