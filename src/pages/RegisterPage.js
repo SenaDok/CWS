@@ -7,6 +7,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import Button from "@material-ui/core/Button";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
+import RoleDialog from "components/RoleDialog";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -20,6 +21,8 @@ const useStyles = makeStyles(() => ({
 
 export default function RegisterPage() {
   const classes = useStyles();
+  const [role, setRole] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(true);
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -42,11 +45,18 @@ export default function RegisterPage() {
     setErrors(newErrors);
   };
 
+  const handleRoleSelect = (selectedRole) => {
+    setRole(selectedRole);
+    setDialogOpen(false);
+  };
+
   return (
     <>
       <DefaultNavbar routes={routes} center />
+      <RoleDialog open={dialogOpen} onSelect={handleRoleSelect} />
       <div className={classes.container}>
         <h2>Register</h2>
+        {role && <p>Selected role: {role}</p>}
         <form onSubmit={handleSubmit} noValidate>
           <TextField
             label="Name"
