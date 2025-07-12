@@ -456,7 +456,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         my={relative ? 0 : 2}
         mx={0}
-        width={relative ? "80%" : "100%"}
+        width="100%"
         borderRadius="xl"
         shadow={transparent ? "none" : "md"}
         color={light ? "white" : "dark"}
