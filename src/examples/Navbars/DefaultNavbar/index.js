@@ -450,16 +450,12 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   );
 
   return (
-    <Container
-      sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}
-      maxWidth={false}
-      disableGutters
-    >
+    <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null} maxWidth={false}>
       <MKBox
         py={2}
         px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
         my={relative ? 0 : 2}
-        mx={relative ? 0 : 1}
+        mx={0}
         width={relative ? "80%" : "100%"}
         borderRadius="xl"
         shadow={transparent ? "none" : "md"}
