@@ -15,18 +15,6 @@ const routes = [
     component: HomePage,
   },
   {
-    name: "Login",
-    icon: <Icon>login</Icon>,
-    route: "/login",
-    component: LoginPage,
-  },
-  {
-    name: "Register",
-    icon: <Icon>person_add</Icon>,
-    route: "/register",
-    component: RegisterPage,
-  },
-  {
     name: "Book a Seat",
     icon: <Icon>event_seat</Icon>,
     route: "/book",
@@ -43,6 +31,18 @@ const routes = [
     icon: <Icon>info</Icon>,
     route: "/about",
     component: AboutPage,
+  },
+  {
+    name: "Login",
+    icon: <Icon>login</Icon>,
+    route: "/login",
+    component: LoginPage,
+  },
+  {
+    name: "Register",
+    icon: <Icon>person_add</Icon>,
+    route: "/register",
+    component: RegisterPage,
   },
 ];
 

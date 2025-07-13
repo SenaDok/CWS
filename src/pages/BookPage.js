@@ -114,7 +114,7 @@ export default function BookPage() {
       if (res.ok) {
         setMessage("✅ Seat booked successfully!");
         setSelectedSeat(null);
-        fetchAvailableSeats(); // refresh available
+        fetchAvailableSeats();
       } else {
         setMessage(`❌ ${data.message}`);
       }
@@ -126,7 +126,7 @@ export default function BookPage() {
 
   return (
     <>
-      <DefaultNavbar routes={routes} />
+      <DefaultNavbar routes={routes} center />
       <MKBox className={classes.container}>
         {/* TOP IMAGES */}
         <div className={classes.imageRow}>
