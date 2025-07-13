@@ -6,6 +6,8 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKProgress from "components/MKProgress";
 import Button from "@material-ui/core/Button";
+import Icon from "@mui/material/Icon";
+import BookSection from "sections/BookSection";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -49,6 +51,10 @@ const useStyles = makeStyles(() => ({
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
     flexShrink: 0,
   },
+  arrowButton: {
+    cursor: "pointer",
+    userSelect: "none",
+  },
 }));
 
 export function BookPage() {
@@ -60,6 +66,12 @@ export function BookPage() {
   const [availableSeats, setAvailableSeats] = useState([]);
   const [selectedSeat, setSelectedSeat] = useState(null);
   const [message, setMessage] = useState("");
+  const images = ["/meetingroom.png", "/seats.png"];
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const prevImage = () =>
+    setCurrentImage((i) => (i - 1 + images.length) % images.length);
+  const nextImage = () => setCurrentImage((i) => (i + 1) % images.length);
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -124,12 +136,21 @@ export function BookPage() {
     }
   };
 
-  return (
-    <MKBox id="book" className={classes.container}>
-      <div className={classes.imageRow}>
-        <img src="/meetingroom.png" alt="Main Room" className={classes.image} />
-        <img src="/seats.png" alt="Meeting Room" className={classes.image} />
-      </div>
+    return (
+      <MKBox id="book" className={classes.container}>
+        <div className={classes.imageRow}>
+          <Icon onClick={prevImage} className={classes.arrowButton}>
+            arrow_back
+          </Icon>
+          <img
+          src={images[currentImage]}
+          alt="Meeting Room"
+          className={classes.image}
+          />
+          <Icon onClick={nextImage} className={classes.arrowButton}>
+          arrow_forward
+          </Icon>
+        </div>
 
       <MKTypography variant="h2" mb={2}>
         Book a Seat
