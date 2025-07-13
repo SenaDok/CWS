@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import routes from "routes";
 import { makeStyles } from "@material-ui/core/styles";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKProgress from "components/MKProgress";
-import Button from "@material-ui/core/Button";
-import Icon from "@mui/material/Icon";
-import BookSection from "sections/BookSection";
+import MKButton from "components/MKButton";
+import MKDatePicker from "components/MKDatePicker";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -25,14 +22,9 @@ const useStyles = makeStyles(() => ({
   },
   seatButton: {
     margin: "5px",
-    padding: "10px 15px",
-    backgroundColor: "#e0e0e0",
-    border: "1px solid #999",
-    cursor: "pointer",
   },
   selectedSeat: {
-    backgroundColor: "#4caf50",
-    color: "white",
+    margin: "5px",
   },
   imageRow: {
     display: "flex",
@@ -51,27 +43,17 @@ const useStyles = makeStyles(() => ({
     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
     flexShrink: 0,
   },
-  arrowButton: {
-    cursor: "pointer",
-    userSelect: "none",
-  },
 }));
 
-export function BookPage() {
+export default function BookSection() {
   const classes = useStyles();
   const [capacity] = useState(50);
   const [occupancy, setOccupancy] = useState(0);
-  const [start, setStart] = useState("");
-  const [end, setEnd] = useState("");
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
   const [availableSeats, setAvailableSeats] = useState([]);
   const [selectedSeat, setSelectedSeat] = useState(null);
   const [message, setMessage] = useState("");
-  const images = ["/meetingroom.png", "/seats.png"];
-  const [currentImage, setCurrentImage] = useState(0);
-
-  const prevImage = () =>
-    setCurrentImage((i) => (i - 1 + images.length) % images.length);
-  const nextImage = () => setCurrentImage((i) => (i + 1) % images.length);
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -95,7 +77,7 @@ export function BookPage() {
     if (!start || !end) return alert("Select both start and end time");
     try {
       const res = await fetch(
-        `http://localhost:5000/api/available-seats?start=${start}&end=${end}`
+        `http://localhost:5000/api/available-seats?start=${start.toISOString()}&end=${end.toISOString()}`
       );
       const data = await res.json();
       setAvailableSeats(data);
@@ -116,8 +98,8 @@ export function BookPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           seat_id: selectedSeat.id,
-          start_time: start,
-          end_time: end,
+          start_time: start.toISOString(),
+          end_time: end.toISOString(),
           user_id: user.id,
         }),
       });
@@ -136,100 +118,89 @@ export function BookPage() {
     }
   };
 
-    return (
-      <MKBox id="book" className={classes.container}>
+  return (
+    <section id="book">
+      <MKBox className={classes.container}>
+        {/* TOP IMAGES */}
         <div className={classes.imageRow}>
-          <Icon onClick={prevImage} className={classes.arrowButton}>
-            arrow_back
-          </Icon>
-          <img
-          src={images[currentImage]}
-          alt="Meeting Room"
-          className={classes.image}
-          />
-          <Icon onClick={nextImage} className={classes.arrowButton}>
-          arrow_forward
-          </Icon>
+          <img src="/meetingroom.png" alt="Main Room" className={classes.image} />
+          <img src="/seats.png" alt="Meeting Room" className={classes.image} />
         </div>
 
-      <MKTypography variant="h2" mb={2}>
-        Book a Seat
-      </MKTypography>
-
-      <MKTypography variant="body1" mb={1}>
-        Capacity: {capacity}
-      </MKTypography>
-      <MKTypography variant="body1" mb={2}>
-        Current Occupancy: {occupancy}
-      </MKTypography>
-      <MKProgress color="info" value={usage} label />
-
-      <hr style={{ margin: "30px 0" }} />
-
-      <label>Start Time</label>
-      <input
-        type="datetime-local"
-        className={classes.input}
-        value={start}
-        onChange={(e) => setStart(e.target.value)}
-      />
-
-      <label>End Time</label>
-      <input
-        type="datetime-local"
-        className={classes.input}
-        value={end}
-        onChange={(e) => setEnd(e.target.value)}
-      />
-
-      <Button variant="contained" color="primary" onClick={fetchAvailableSeats}>
-        Check Available Seats
-      </Button>
-
-      {availableSeats.length > 0 && (
-        <>
-          <h3 style={{ marginTop: "2rem" }}>Available Seats</h3>
-          <div>
-            {availableSeats.map((seat) => (
-              <button
-                key={seat.id}
-                className={`${classes.seatButton} ${
-                  selectedSeat?.id === seat.id ? classes.selectedSeat : ""
-                }`}
-                onClick={() => setSelectedSeat(seat)}
-              >
-                {seat.label} ({seat.area})
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-
-      {selectedSeat && (
-        <>
-          <MKTypography mt={3} mb={1}>
-            Selected: {selectedSeat.label}
-          </MKTypography>
-          <Button variant="contained" color="secondary" onClick={bookSelectedSeat}>
-            Confirm Booking
-          </Button>
-        </>
-      )}
-
-      {message && (
-        <MKTypography mt={2} color="info">
-          {message}
+        <MKTypography variant="h2" mb={2}>
+          Book a Seat
         </MKTypography>
-      )}
-    </MKBox>
-  );
-}
 
-export default function BookPage() {
-  return (
-    <>
-      <DefaultNavbar routes={routes} />
-      <BookSection />
-    </>
+        <MKTypography variant="body1" mb={1}>
+          Capacity: {capacity}
+        </MKTypography>
+        <MKTypography variant="body1" mb={2}>
+          Current Occupancy: {occupancy}
+        </MKTypography>
+        <MKProgress color="info" value={usage} label />
+
+        <hr style={{ margin: "30px 0" }} />
+
+        <MKBox mb={2}>
+          <MKDatePicker
+            value={start}
+            onChange={([date]) => setStart(date)}
+            options={{ enableTime: true, dateFormat: "Y-m-d H:i" }}
+            input={{ label: "Start Time", variant: "standard", fullWidth: true }}
+          />
+        </MKBox>
+        <MKBox mb={2}>
+          <MKDatePicker
+            value={end}
+            onChange={([date]) => setEnd(date)}
+            options={{ enableTime: true, dateFormat: "Y-m-d H:i" }}
+            input={{ label: "End Time", variant: "standard", fullWidth: true }}
+          />
+        </MKBox>
+
+        <MKButton color="info" onClick={fetchAvailableSeats} className={classes.input}>
+          Check Available Seats
+        </MKButton>
+
+        {availableSeats.length > 0 && (
+          <>
+            <h3 style={{ marginTop: "2rem" }}>Available Seats</h3>
+            <div>
+              {availableSeats.map((seat) => (
+                <MKButton
+                  key={seat.id}
+                  variant="outlined"
+                  size="small"
+                  color={selectedSeat?.id === seat.id ? "success" : "info"}
+                  className={
+                    selectedSeat?.id === seat.id ? classes.selectedSeat : classes.seatButton
+                  }
+                  onClick={() => setSelectedSeat(seat)}
+                >
+                  {seat.label} ({seat.area})
+                </MKButton>
+              ))}
+            </div>
+          </>
+        )}
+
+        {selectedSeat && (
+          <>
+            <MKTypography mt={3} mb={1}>
+              Selected: {selectedSeat.label}
+            </MKTypography>
+            <MKButton color="info" onClick={bookSelectedSeat}>
+              Confirm Booking
+            </MKButton>
+          </>
+        )}
+
+        {message && (
+          <MKTypography mt={2} color="info">
+            {message}
+          </MKTypography>
+        )}
+      </MKBox>
+    </section>
   );
 }
