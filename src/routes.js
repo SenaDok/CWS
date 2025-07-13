@@ -2,9 +2,6 @@ import React from "react";
 import Icon from "@mui/material/Icon";
 import LoginPage from "pages/LoginPage.js";
 import RegisterPage from "./pages/RegisterPage";
-import BookPage from "./pages/BookPage";
-import SubscriptionPage from "./pages/SubscriptionPage";
-import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 
 const routes = [
@@ -17,20 +14,17 @@ const routes = [
   {
     name: "Book a Seat",
     icon: <Icon>event_seat</Icon>,
-    route: "/book",
-    component: BookPage,
+    href: "#book",
   },
   {
     name: "Subscriptions",
     icon: <Icon>gavel</Icon>,
-    route: "/subscriptions",
-    component: SubscriptionPage,
+    href: "#subscriptions",
   },
   {
     name: "About Us",
     icon: <Icon>info</Icon>,
-    route: "/about",
-    component: AboutPage,
+    href: "#about",
   },
   {
     name: "Login",
