@@ -51,7 +51,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function BookPage() {
+export function BookPage() {
   const classes = useStyles();
   const [capacity] = useState(50);
   const [occupancy, setOccupancy] = useState(0);
@@ -125,85 +125,90 @@ export default function BookPage() {
   };
 
   return (
-    <>
-      <DefaultNavbar routes={routes} center />
-      <MKBox className={classes.container}>
-        {/* TOP IMAGES */}
-        <div className={classes.imageRow}>
-          <img src="/meetingroom.png" alt="Main Room" className={classes.image} />
-          <img src="/seats.png" alt="Meeting Room" className={classes.image} />
-        </div>
+    <MKBox id="book" className={classes.container}>
+      <div className={classes.imageRow}>
+        <img src="/meetingroom.png" alt="Main Room" className={classes.image} />
+        <img src="/seats.png" alt="Meeting Room" className={classes.image} />
+      </div>
 
-        <MKTypography variant="h2" mb={2}>
-          Book a Seat
-        </MKTypography>
+      <MKTypography variant="h2" mb={2}>
+        Book a Seat
+      </MKTypography>
 
-        <MKTypography variant="body1" mb={1}>
-          Capacity: {capacity}
-        </MKTypography>
-        <MKTypography variant="body1" mb={2}>
-          Current Occupancy: {occupancy}
-        </MKTypography>
-        <MKProgress color="info" value={usage} label />
+      <MKTypography variant="body1" mb={1}>
+        Capacity: {capacity}
+      </MKTypography>
+      <MKTypography variant="body1" mb={2}>
+        Current Occupancy: {occupancy}
+      </MKTypography>
+      <MKProgress color="info" value={usage} label />
 
-        <hr style={{ margin: "30px 0" }} />
+      <hr style={{ margin: "30px 0" }} />
 
-        <label>Start Time</label>
-        <input
-          type="datetime-local"
-          className={classes.input}
-          value={start}
-          onChange={(e) => setStart(e.target.value)}
-        />
+      <label>Start Time</label>
+      <input
+        type="datetime-local"
+        className={classes.input}
+        value={start}
+        onChange={(e) => setStart(e.target.value)}
+      />
 
-        <label>End Time</label>
-        <input
-          type="datetime-local"
-          className={classes.input}
-          value={end}
-          onChange={(e) => setEnd(e.target.value)}
-        />
+      <label>End Time</label>
+      <input
+        type="datetime-local"
+        className={classes.input}
+        value={end}
+        onChange={(e) => setEnd(e.target.value)}
+      />
 
-        <Button variant="contained" color="primary" onClick={fetchAvailableSeats}>
-          Check Available Seats
-        </Button>
+      <Button variant="contained" color="primary" onClick={fetchAvailableSeats}>
+        Check Available Seats
+      </Button>
 
-        {availableSeats.length > 0 && (
-          <>
-            <h3 style={{ marginTop: "2rem" }}>Available Seats</h3>
-            <div>
-              {availableSeats.map((seat) => (
-                <button
-                  key={seat.id}
-                  className={`${classes.seatButton} ${
-                    selectedSeat?.id === seat.id ? classes.selectedSeat : ""
-                  }`}
-                  onClick={() => setSelectedSeat(seat)}
-                >
-                  {seat.label} ({seat.area})
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+      {availableSeats.length > 0 && (
+        <>
+          <h3 style={{ marginTop: "2rem" }}>Available Seats</h3>
+          <div>
+            {availableSeats.map((seat) => (
+              <button
+                key={seat.id}
+                className={`${classes.seatButton} ${
+                  selectedSeat?.id === seat.id ? classes.selectedSeat : ""
+                }`}
+                onClick={() => setSelectedSeat(seat)}
+              >
+                {seat.label} ({seat.area})
+              </button>
+            ))}
+          </div>
+        </>
+      )}
 
-        {selectedSeat && (
-          <>
-            <MKTypography mt={3} mb={1}>
-              Selected: {selectedSeat.label}
-            </MKTypography>
-            <Button variant="contained" color="secondary" onClick={bookSelectedSeat}>
-              Confirm Booking
-            </Button>
-          </>
-        )}
-
-        {message && (
-          <MKTypography mt={2} color="info">
-            {message}
+      {selectedSeat && (
+        <>
+          <MKTypography mt={3} mb={1}>
+            Selected: {selectedSeat.label}
           </MKTypography>
-        )}
-      </MKBox>
+          <Button variant="contained" color="secondary" onClick={bookSelectedSeat}>
+            Confirm Booking
+          </Button>
+        </>
+      )}
+
+      {message && (
+        <MKTypography mt={2} color="info">
+          {message}
+        </MKTypography>
+      )}
+    </MKBox>
+  );
+}
+
+export default function BookPage() {
+  return (
+    <>
+      <DefaultNavbar routes={routes} />
+      <BookSection />
     </>
   );
 }

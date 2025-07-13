@@ -11,6 +11,7 @@ import bg2 from "assets/images/CWS-image.jpg";
 import bg3 from "assets/images/CWS-image3.jpg";
 import bg4 from "assets/images/CWS-image4.jpg";
 import bg5 from "assets/images/CWS-image2.jpg";
+import Footer from "components/Footer";
 
 export default function HomePage() {
   return (
@@ -21,6 +22,7 @@ export default function HomePage() {
       <SubscriptionSection />
       <AboutSection />
       <ScrollTopButton />
+      <Footer />
     </>
   );
 }

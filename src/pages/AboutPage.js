@@ -7,18 +7,17 @@ import MKBox from "components/MKBox";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 
-export default function AboutPage() {
+export function AboutPage() {
   return (
-    <>
-      <DefaultNavbar routes={routes} center />
-      <div
-        style={{
-          paddingTop: "100px",
-          paddingLeft: "2rem",
-          paddingRight: "2rem",
-          paddingBottom: "2rem",
-        }}
-      >
+    <div
+      id="about"
+      style={{
+        paddingTop: "100px",
+        paddingLeft: "2rem",
+        paddingRight: "2rem",
+        paddingBottom: "2rem",
+      }}
+    >
         <h1>About Our Coworking Space</h1>
 
         {/* Coworking Space Image */}
@@ -77,6 +76,14 @@ export default function AboutPage() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+  );
+}
+
+export default function AboutPage() {
+  return (
+    <>
+      <DefaultNavbar routes={routes} center />
+      <AboutSection />
     </>
   );
 }
